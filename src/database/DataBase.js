@@ -2,24 +2,40 @@
  * Created by yangzhenyu on 2017/7/20.
  */
 
-// let MongoClient = require('mongodb').MongoClient;
+ let MongoClient = window.require('mongodb').MongoClient;
 
 class DataBase
 {
     constructor() {
-        // let url = 'mongodb://localhost:27017';
-        // MongoClient.connect(url, function(err, db) {
-        //     console.log("Connected correctly to server.");
-        // });
-
-        this.db ={};
+        let url = 'mongodb://localhost:27017';
+        MongoClient.connect(url, (err, db)=> {
+            if (!err) {
+                this.db=db;
+                console.log("Connected correctly to server.");
+            } else {
+                this.db = null;
+            }
+        });
     }
 
     insertData(col, data, cb) {
-        // let collection = this.db.collection(col);
-        // collection.insert(data, cb);
-
-        this.db[col] = data;
+        let collection = this.db.collection(col);
+        debugger;
+        if (Array.isArray(data)) {
+            collection.insertMany(data, (err, r)=>{
+                if (!err) {
+                    console.log("insert succuss! = "+ r);
+                }
+                cb&&cb(err);
+            });
+        } else {
+            collection.insertOne(data, (err, r)=>{
+                if (!err) {
+                    console.log("insert succuss! = "+ r);
+                }
+                cb&&cb(err);
+            });
+        }
     }
 
 
@@ -28,12 +44,33 @@ class DataBase
         // collection.save(data, cb);
     }
 
+
+    deleteData(col, data, cb) {
+        let collection = this.db.collection(col);
+        if (Array.isArray(data)) {
+            collection.deleteMany(data, (err, r)=>{
+                if (!err) {
+                    console.log("delete succuss! = "+ r);
+                }
+                cb&&cb(err);
+            });
+        } else {
+            collection.deleteOne(data, (err, r)=>{
+                if (!err) {
+                    console.log("delete succuss! = "+ r);
+                }
+                cb&&cb(err);
+            });
+        }
+    }
+
     getData(col, cb) {
-        // let collection=this.db[col];
-        // collection.find().toArray(cb);
-            cb(this.db[col]);
+        let collection = this.db.collection(col);
+        collection.find({}).toArray((err, doc)=>{
+            cb && cb(doc);
+        });
     }
 
 }
 
-module.exports = new DataBase;
+module.exports = new DataBase();

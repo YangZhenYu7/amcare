@@ -2,6 +2,7 @@
   "name": "am-care",
   "version": "0.1.0",
   "private": true,
+  "main": "electron-starter.js",
   "dependencies": {
     "antd": "^2.12.2",
     "babel-register": "^6.24.1",
@@ -14,9 +15,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron ."
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.2.1"
+    "babel-plugin-import": "^1.2.1",
+    "electron": "^1.6.11"
   }
 }

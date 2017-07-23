@@ -9,10 +9,11 @@ import About from '../page/About';
 import DrugQuery from '../page/DrugQuery';
 import DrugAdd from '../page/DrugAdd';
 import ClinicInfo from '../page/ClinicInfo';
+import PatientManage from '../page/PatientManage';
 
 class ContentRouter
 {
-    static router={"0":[ReservateInfo]
+    static router={"0":[ReservateInfo, PatientManage]
                     , '2':[ClinicInfo]
                     , '4':[DrugQuery, DrugAdd]
                     , '6':[AccountInfo, About]}

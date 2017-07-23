@@ -3,8 +3,7 @@
  */
 
 
-let db =  require('../database/DataBase.js');
-//     import DataBase from '../database/DataBase.js'
+let db = require('../database/DataBase.js');
 
 const reservation='0';
 const diagnosing='1';
@@ -25,15 +24,14 @@ class Patient
 class PatientLayer
 {
     inserPatient(data) {
-        // db.insertData('patients', JSON.stringify(data), (err)=>{
-        // debugger;
-        // });
+        db.insertData('patients', data, (err)=>{
+        debugger;
+        });
     }
 
-    getAllPatientsByState(state){
-
-        db.getData('patients', state, (err, docs)=>{
-            debugger;
+    getAllPatientsByState(state, cb){
+        db.getData('patients', (docs)=>{
+            cb && cb(docs);
         });
     }
 

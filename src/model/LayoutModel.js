@@ -2,7 +2,6 @@
  * Created by yangzhenyu on 2017/7/19.
  */
 
-let db =  require('../database/DataBase.js');
 class LayoutModel
 {
     static HeaderData = ["护士站", "诊断中心", "诊所管理", "收费退款", "进销存", "财务报表","其他"];
