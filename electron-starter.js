@@ -4,7 +4,8 @@
 const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
-
+const {shell} = require('electron')
+const spawn = require('child_process').spawn;
 const path = require('path')
 const url = require('url')
 
@@ -21,6 +22,8 @@ function createWindow () {
     //     slashes: true
     // }))
 
+    startDBServer();
+
     mainWindow.loadURL('http://localhost:3000');
 
     // Open the DevTools.
@@ -30,6 +33,22 @@ function createWindow () {
     mainWindow.on('closed', function () {
         mainWindow = null
     })
+}
+
+function startDBServer() {
+    free = spawn('mongod', ['--dbpath', './src/database/mongodb', '--port', '12221']);
+// 捕获标准输出并将其打印到控制台
+    free.stdout.on('data', function (data) {
+        console.log('standard output:\n' + data);
+    });
+// 捕获标准错误输出并将其打印到控制台
+    free.stderr.on('data', function (data) {
+        console.log('standard error output:\n' + data);
+    });
+// 注册子进程关闭事件
+    free.on('exit', function (code, signal) {
+        console.log('child process eixt ,exit:' + code);
+    });
 }
 
 

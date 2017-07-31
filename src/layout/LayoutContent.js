@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import LayoutModel from '../model/LayoutModel.js';
 import ContentRouter from '../router/ContentRouter.js';
-import ClinicInfo from '../page/ReservateInfo';
-import AccountInfo from '../page/AccountInfo';
+import ClinicInfo from '../page/reservation/ReservateInfo';
+import AccountInfo from '../page/acount/AccountInfo';
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { SubMenu } = Menu;

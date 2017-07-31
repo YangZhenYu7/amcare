@@ -12,7 +12,7 @@ class Unspport extends Component {
         return(
             <Alert
                 message="该功能暂未开启"
-                description="下个版本马上支持"
+                description="等待下个版本支持"
                 type=""
             />
         );

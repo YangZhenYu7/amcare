@@ -7,7 +7,7 @@
 class DataBase
 {
     constructor() {
-        let url = 'mongodb://localhost:27017';
+        let url = 'mongodb://localhost:12221';
         MongoClient.connect(url, (err, db)=> {
             if (!err) {
                 this.db=db;
@@ -20,7 +20,6 @@ class DataBase
 
     insertData(col, data, cb) {
         let collection = this.db.collection(col);
-        debugger;
         if (Array.isArray(data)) {
             collection.insertMany(data, (err, r)=>{
                 if (!err) {
@@ -69,6 +68,11 @@ class DataBase
         collection.find({}).toArray((err, doc)=>{
             cb && cb(doc);
         });
+    }
+
+    getDataCount(col) {
+        let collection = this.db.collection(col);
+        return collection.find({}).count();
     }
 
 }

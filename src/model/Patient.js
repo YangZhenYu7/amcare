@@ -5,27 +5,55 @@
 
 let db = require('../database/DataBase.js');
 
-const reservation='0';
-const diagnosing='1';
-const diagnosed='2';
+export const PatientKeyID="id";
+export const PatientKeyIDTemp='idTemp';
+export const PatientKeyName='name';
+export const PatientKeyBirthday='birthday';
+export const PatientKeyPhone='phone';
+export const PatientKeyGender='gender';
+export const PatientKeyDoctor='doctor';
+export const PatientKeyCareDate='carre_date';
+export const PatientKeyState='state';
 
-class Patient
+export const reservation='0';
+export const diagnosing='1';
+export const diagnosed='2';
+
+export class Patient
 {
     constructor() {
-        this.name='uu';
-        this.birthday='';
-        this.phone='';
-        this.gender='';
-        this.carre_date='';
-        this.state=reservation;
+        this[PatientKeyID]=0;
+        this[PatientKeyIDTemp]=0;
+        this[PatientKeyName]='uu';
+        this[PatientKeyBirthday]='';
+        this[PatientKeyPhone]='';
+        this[PatientKeyGender]='male';
+        this[PatientKeyCareDate]='';
+        this[PatientKeyDoctor]='';
+        this[PatientKeyState]=reservation;
     }
 }
 
-class PatientLayer
+export class PatientLayer
 {
-    inserPatient(data) {
+    getCurID() {
+
+    }
+
+    inserPatient(data, cb) {
+        if (!data[PatientKeyID]) {
+            data[PatientKeyID] = db.getDataCount('patients')+1;
+        }
+
+
         db.insertData('patients', data, (err)=>{
-        debugger;
+            cb && cb(err);
+        });
+    }
+
+    deletePatient(data, cb) {
+        db.deleteData('patients', data, (err)=>{
+            cb && cb(err);
         });
     }
 
@@ -40,5 +68,3 @@ class PatientLayer
     }
 
 }
-
-export {Patient, PatientLayer};
