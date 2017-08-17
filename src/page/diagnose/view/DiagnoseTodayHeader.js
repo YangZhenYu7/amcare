@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import {Button} from 'antd';
+import '../css/today_header.css';
 
 class DiagnoseTodayHeader extends Component {
     constructor(spec) {
@@ -17,10 +18,13 @@ class DiagnoseTodayHeader extends Component {
 
     render() {
         return(
-            <div display="flex" justify="space-around">
-                <Button type="dashed" size="large" onClick={this.onClick.bind(this,0)}>今日就诊人数</Button>
-                <Button type="dashed" size="large" onClick={this.onClick.bind(this,1)}>今日诊断中人数</Button>
-                <Button type="dashed" size="large" onClick={this.onClick.bind(this,2)}>今日待就诊人数</Button>
+            <div className="div_header">
+                <Button className='button_header' type="dashed" size="large"
+                        onClick={this.onClick.bind(this,0)}>今日就诊人数</Button>
+                <Button className='button_header' type="dashed" size="large"
+                        onClick={this.onClick.bind(this,1)}>今日诊断中人数</Button>
+                <Button className='button_header'type="dashed" size="large"
+                        onClick={this.onClick.bind(this,2)}>今日待就诊人数</Button>
             </div>
         );
     }

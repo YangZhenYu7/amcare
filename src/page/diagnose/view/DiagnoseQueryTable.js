@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import {Table, Form,Row, Col, Input, Button, Select} from 'antd';
 import * as PatientM from '../../../model/Patient';
+import * as DiagnoseM from '../../../model/Diagnose';
+import "../css/query_table.css";
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -29,7 +31,7 @@ class AdvancedSearchForm extends React.Component {
 
         return (
             <Form
-                className="ant-advanced-search-form"
+                className="search_form"
                 onSubmit={this.handleSearch}>
                 <Row gutter={40}>
                     <Col span={8} key={0}  >
@@ -37,9 +39,9 @@ class AdvancedSearchForm extends React.Component {
                             {getFieldDecorator('state')(
                                 <Select placeholder="全部">
                                     <Option value={null}>全部</Option>
-                                    <Option value={PatientM.reservation}>待就诊</Option>
-                                    <Option value={PatientM.diagnosing}>就诊中</Option>
-                                    <Option value={PatientM.diagnosed}>已诊断</Option>
+                                    <Option value={DiagnoseM.reservation}>待就诊</Option>
+                                    <Option value={DiagnoseM.diagnosing}>就诊中</Option>
+                                    <Option value={DiagnoseM.diagnosed}>已诊断</Option>
                                 </Select>
                             )}
                         </FormItem>
@@ -60,7 +62,7 @@ class AdvancedSearchForm extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={24} style={{ textAlign: 'right' }}>
+                    <Col span={30} >
                         <Button type="primary" htmlType="submit">查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>清除选择
                         </Button>

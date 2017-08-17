@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import {Row, Col} from 'antd';
 import * as PatientM from '../../model/Patient'
+import './css/reservate_call.css';
 
 class ReservaterCall extends Component {
     state={
@@ -14,11 +15,11 @@ class ReservaterCall extends Component {
 
     constructor(spec) {
         super(spec);
-        this.oplayer = new PatientM.PatientLayer();
+        this.oplayer = new PatientM.Patient();
     }
 
     componentDidMount() {
-        this.oplayer.getAllPatientsByState(1, (res)=>{
+        this.oplayer.getAllDataByState(1, (res)=>{
             this.setState({'data':res});
         });
     }
@@ -29,16 +30,18 @@ class ReservaterCall extends Component {
         for (let index in datas) {
             let item = datas[index];
             let name = item[PatientM.PatientKeyName];
-            let id = item[PatientM.PatientKeyIDTemp] | '1';
+            let id = item[PatientM.PatientKeyID] | '1';
             let doctor= item[PatientM.PatientKeyDoctor];
-            colViews.push(<Row><Col>{'请'+id+'号'+name+'到'+doctor+'医生处就诊'}</Col></Row>)
+            colViews.push(<Row><Col className="label_col">
+                {'请'+id+'号 '+name+' 到 '+doctor+' 医生处就诊'}
+                </Col></Row>);
         }
         return colViews;
     }
 
     render() {
         return (
-            <div type="flex" justify="space-around">
+            <div>
                 {this.getDisplayColText()}
             </div>
         );

@@ -6,64 +6,58 @@
 let db = require('../database/DataBase.js');
 
 export const PatientKeyID="id";
-export const PatientKeyIDTemp='idTemp';
 export const PatientKeyName='name';
 export const PatientKeyBirthday='birthday';
 export const PatientKeyPhone='phone';
 export const PatientKeyGender='gender';
-export const PatientKeyDoctor='doctor';
-export const PatientKeyCareDate='carre_date';
-export const PatientKeyState='state';
 
-export const reservation='0';
-export const diagnosing='1';
-export const diagnosed='2';
+export const PatientKeyContactName='contact_name';
+export const PatientKeyContactRels='contact_relation';
+export const PatientKeyContactPhone='contact_name_phone';
+
+//TODO拆分
+export const PatientKeyDoctor='doctor';
+export const  PatientKeyCareDate = 'CareDate';
+
+const TableName='patients';
 
 export class Patient
 {
     constructor() {
         this[PatientKeyID]=0;
-        this[PatientKeyIDTemp]=0;
         this[PatientKeyName]='uu';
         this[PatientKeyBirthday]='';
         this[PatientKeyPhone]='';
         this[PatientKeyGender]='male';
-        this[PatientKeyCareDate]='';
-        this[PatientKeyDoctor]='';
-        this[PatientKeyState]=reservation;
-    }
-}
-
-export class PatientLayer
-{
-    getCurID() {
-
+        this[PatientKeyContactName]='';
+        this[PatientKeyContactRels]='';
+        this[PatientKeyContactPhone]='';
     }
 
-    inserPatient(data, cb) {
+    insertData(data, cb) {
         if (!data[PatientKeyID]) {
-            data[PatientKeyID] = db.getDataCount('patients')+1;
+            data[PatientKeyID] = db.getDataCount(TableName)+1;
         }
 
 
-        db.insertData('patients', data, (err)=>{
+        db.insertData(TableName, data, (err)=>{
             cb && cb(err);
         });
     }
 
-    deletePatient(data, cb) {
-        db.deleteData('patients', data, (err)=>{
+    deleteData(data, cb) {
+        db.deleteData(TableName, data, (err)=>{
             cb && cb(err);
         });
     }
 
-    getAllPatientsByState(state, cb){
-        db.getData('patients', (docs)=>{
+    getAllDataByState(state, cb){
+        db.getData(TableName, (docs)=>{
             cb && cb(docs);
         });
     }
 
-    getAllPatientsByDate(date){
+    getAllDataByDate(date){
         return ;
     }
 

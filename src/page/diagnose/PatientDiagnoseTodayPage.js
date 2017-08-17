@@ -11,11 +11,11 @@ import DiagnoseTodayHeader from './view/DiagnoseTodayHeader';
 class PatientDiagnoseToday extends Component {
     constructor(spec) {
         super(spec);
-        this.opLayer = new PatientM.PatientLayer;
+        this.opLayer = new PatientM.Patient();
     }
 
     onDelete(record) {
-        this.opLayer.deletePatient(record, (err)=>{
+        this.opLayer.deleteData(record, (err)=>{
             if (!err) {
                 message.success('删除成功');
                 this.search();
@@ -26,7 +26,7 @@ class PatientDiagnoseToday extends Component {
     }
 
     onEdit(record) {
-        this.opLayer.deletePatient(record, (err) => {
+        this.opLayer.deleteData(record, (err) => {
             if (!err) {
                 message.success('删除成功');
             } else {
@@ -36,7 +36,7 @@ class PatientDiagnoseToday extends Component {
     }
 
     search(option){
-        this.opLayer.getAllPatientsByState(1, (docs)=>{
+        this.opLayer.getAllDataByState(1, (docs)=>{
             let stateData=[];
             for (let index in docs) {
                 let item = docs[index];

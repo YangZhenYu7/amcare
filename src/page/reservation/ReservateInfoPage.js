@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { Form, message, Select, Row, Col, Card, Tabs } from 'antd';
-import {Patient, PatientLayer, } from '../../model/Patient';
+import {Patient } from '../../model/Patient';
 import RegisterForm from './view/RegisterForm';
 import ReservattionQueryTable from './view/ReservattionQueryTable'
 const FormItem = Form.Item;
@@ -13,17 +13,17 @@ const TabPane = Tabs.TabPane;
 class ClinicInfo extends Component {
     constructor(spec) {
         super(spec);
-        this.patientLayer = new PatientLayer();
+        this.patientLayer = new Patient();
     }
 
     onDateSelected(date) {
-        this.patientLayer.getAllPatientsByState(1, (result)=>{
+        this.patientLayer.getAllDataByState(1, (result)=>{
             this.refs.queryTable.updateState(result);
         });
     }
 
     onRegister(obj) {
-        this.patientLayer.inserPatient(obj, (err)=>{
+        this.patientLayer.insertData(obj, (err)=>{
             if (!err) {
                 message.success('挂号成功');
             } else {

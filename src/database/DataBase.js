@@ -4,8 +4,7 @@
 
  let MongoClient = window.require('mongodb').MongoClient;
 
-class DataBase
-{
+class DataBase  {
     constructor() {
         let url = 'mongodb://localhost:12221';
         MongoClient.connect(url, (err, db)=> {

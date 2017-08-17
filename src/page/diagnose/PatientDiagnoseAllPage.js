@@ -11,11 +11,11 @@ import DiagnoseQueryTable from './view/DiagnoseQueryTable';
 class PatientManage extends Component {
     constructor(spec) {
         super(spec);
-        this.opLayer = new PatientM.PatientLayer;
+        this.opLayer = new PatientM.Patient();
     }
 
     onDelete(record) {
-        this.opLayer.deletePatient(record, (err)=>{
+        this.opLayer.deleteData(record, (err)=>{
             if (!err) {
                 message.success('删除成功');
                 this.search();
@@ -26,7 +26,7 @@ class PatientManage extends Component {
     }
 
     onEdit(record) {
-        this.opLayer.deletePatient(record, (err) => {
+        this.opLayer.deleteData(record, (err) => {
             if (!err) {
                 message.success('删除成功');
             } else {
@@ -36,7 +36,7 @@ class PatientManage extends Component {
     }
 
     search(option){
-        this.opLayer.getAllPatientsByState(1, (docs)=>{
+        this.opLayer.getAllDataByState(1, (docs)=>{
             let stateData=[];
             for (let index in docs) {
                 let item = docs[index];
@@ -50,9 +50,10 @@ class PatientManage extends Component {
     render() {
         return(
             <div>
-                <DiagnoseQueryTable ref='table' onSearch={this.search.bind(this)}
-                                           onDelete={this.onDelete.bind(this)}
-                                           onEdit={this.onEdit.bind(this)} />
+                <DiagnoseQueryTable ref='table'
+                                    onSearch={this.search.bind(this)}
+                                    onDelete={this.onDelete.bind(this)}
+                                    onEdit={this.onEdit.bind(this)} />
             </div>
         );
     }
