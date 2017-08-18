@@ -18,8 +18,7 @@ class LoginEntryImp extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.login();
+                this.props.login(values);
             }
         });
     }

@@ -24,14 +24,14 @@ class DataBase  {
                 if (!err) {
                     console.log("insert succuss! = "+ r);
                 }
-                cb&&cb(err);
+                cb&&cb(!err);
             });
         } else {
             collection.insertOne(data, (err, r)=>{
                 if (!err) {
                     console.log("insert succuss! = "+ r);
                 }
-                cb&&cb(err);
+                cb&&cb(!err);
             });
         }
     }
@@ -50,14 +50,14 @@ class DataBase  {
                 if (!err) {
                     console.log("delete succuss! = "+ r);
                 }
-                cb&&cb(err);
+                cb&&cb(!err);
             });
         } else {
             collection.deleteOne(data, (err, r)=>{
                 if (!err) {
                     console.log("delete succuss! = "+ r);
                 }
-                cb&&cb(err);
+                cb&&cb(!err);
             });
         }
     }
@@ -68,6 +68,14 @@ class DataBase  {
             cb && cb(doc);
         });
     }
+
+    getData(col, dict, cb) {
+        let collection = this.db.collection(col);
+        collection.find(dict).toArray((err, doc)=>{
+            cb && cb(doc);
+        });
+    }
+
 
     getDataCount(col) {
         let collection = this.db.collection(col);

@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import Account from './model/Account';
 import LayoutMain from './layout/LayoutMain';
 import LoginEntry from './login/LoginEntry';
-
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { Header, Content, Sider, Footer } = Layout;
+import {message} from 'antd';
 
 class App extends Component {
     state = {
-        entry: 1
+        isLogin: true
     }
 
-    login() {
-        this.setState({entry:1});
+    login(values) {
+        Account.login(values['userName'], values['password'], (res)=>{
+            this.setState({isLogin:res});
+        });
+
+        // Account.register(values, (res)=>{
+        //     message.success(res ? '注册成功':'注册失败');
+        // });
     }
 
     render() {
         let renderNode = null;
-        if (this.state.entry == 0) {
+        if (!this.state.isLogin) {
             renderNode = <LoginEntry login={this.login.bind(this)}/>;
         } else {
             renderNode =<LayoutMain/>;
